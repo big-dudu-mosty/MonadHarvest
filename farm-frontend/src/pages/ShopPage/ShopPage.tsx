@@ -5,6 +5,7 @@ import { WalletConnection } from '@/components/web3/WalletConnection'
 import { useAvailableSeedsForNative, useAvailableSeedsForKind } from '@/hooks/contracts/useShop'
 import { CropType } from '@/types/game'
 import { ShoppingBagIcon, SparklesIcon } from '@heroicons/react/24/outline'
+import { OkxSwapPanel } from '@/components/okx'
 
 export function ShopPage() {
   const { isConnected } = useAccount()
@@ -39,6 +40,8 @@ export function ShopPage() {
           购买种子开始您的农场之旅
         </p>
       </div>
+
+      <OkxSwapPanel />
 
       {/* 购买提示 */}
       <Card>

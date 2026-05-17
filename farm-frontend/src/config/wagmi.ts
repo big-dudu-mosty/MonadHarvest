@@ -7,18 +7,37 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { MONAD_TESTNET } from '@/types/contracts'
 
+/** 以太坊主网 — 供 OKX Swap 演示使用 */
+const ETHEREUM_MAINNET = {
+  id: 1,
+  name: 'Ethereum',
+  network: 'homestead',
+  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+  rpcUrls: {
+    default: { http: ['https://eth.llamarpc.com'] },
+    public: { http: ['https://eth.llamarpc.com'] },
+  },
+  blockExplorers: {
+    default: { name: 'Etherscan', url: 'https://etherscan.io' },
+  },
+} as const
+
 // 配置链和提供者
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [MONAD_TESTNET],
+  [MONAD_TESTNET, ETHEREUM_MAINNET],
   [
     jsonRpcProvider({
-      rpc: () => ({
-        http: 'https://testnet-rpc.monad.xyz',
-        webSocket: undefined, // Monad 暂时可能不支持 WebSocket
-      }),
-      // 添加重试和错误处理配置
-      // retryCount: 3,
-      // retryDelay: 1000,
+      rpc: (chain) => {
+        if (chain.id === MONAD_TESTNET.id) {
+          return {
+            http: 'https://testnet-rpc.monad.xyz',
+            webSocket: undefined,
+          }
+        }
+        return {
+          http: 'https://eth.llamarpc.com',
+        }
+      },
     }),
     publicProvider(),
   ]

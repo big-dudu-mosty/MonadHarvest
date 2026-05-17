@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui'
 import { WalletConnection } from '@/components/web3/WalletConnection'
 import { TrophyIcon, HeartIcon } from '@heroicons/react/24/outline'
 import { usePaginatedLeaderboard } from '@/hooks/contracts/usePaginatedLeaderboard'
+import { OkxHotTokensPanel } from '@/components/okx'
 
 type LeaderboardTab = 'crops' | 'kindness'
 
@@ -205,6 +206,8 @@ export function LeaderboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <OkxHotTokensPanel />
 
       {/* 收获排行榜 */}
       {activeTab === 'crops' && (

@@ -7,6 +7,7 @@ import { CROP_CONFIG, CropType } from '@/types/game'
 import { useUserSeeds } from '@/hooks/contracts'
 import { usePlayerStats, usePlayerAchievements, usePlayerActivity } from '@/hooks/contracts/usePlayerStats'
 import { ErrorBoundary } from '@/components/ui'
+import { OkxPortfolioPanel } from '@/components/okx'
 import {
   UserIcon,
   WalletIcon,
@@ -194,6 +195,8 @@ export function ProfilePage() {
           </CardContent>
         </Card>
       </div>
+
+      <OkxPortfolioPanel />
 
       {/* 游戏统计详情 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
